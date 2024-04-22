@@ -259,6 +259,7 @@ class OsmNetworkWrapper(NetworkWrapperProtocol):
             if _available_road_types
             else []
         )
+        osmnx.utils.config(use_cache=False)
 
         if not _available_road_types and not network_type:
             raise ValueError("Either of the link_type or network_type should be known")
