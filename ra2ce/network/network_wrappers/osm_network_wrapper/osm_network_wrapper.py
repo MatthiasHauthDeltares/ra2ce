@@ -259,7 +259,12 @@ class OsmNetworkWrapper(NetworkWrapperProtocol):
             if _available_road_types
             else []
         )
-        osmnx.utils.config(cache_folder=Path(r"C:\Users\hauth\OneDrive - Stichting Deltares\Documents\tempo\cache"))
+        osmnx.utils.config(use_cache=False)
+        # osmnx.settings.cache_folder = Path(r"C:\Users\hauth\OneDrive - Stichting Deltares\Documents\tempo\cache")
+        from osmnx.settings import cache_folder, use_cache
+        use_cache = False
+
+
 
         if not _available_road_types and not network_type:
             raise ValueError("Either of the link_type or network_type should be known")

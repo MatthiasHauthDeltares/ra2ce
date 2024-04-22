@@ -175,6 +175,10 @@ class Network:
             # If all required attributes are present, return the original graph
             return graph
         graph = _add_x_y_to_nodes(graph)
+        osmnx.utils.config(use_cache=False)
+        # osmnx.settings.cache_folder = Path(r"C:\Users\hauth\OneDrive - Stichting Deltares\Documents\tempo\cache")
+        from osmnx.settings import cache_folder, use_cache
+        use_cache = False
         gdf_nodes, gdf_edges = osmnx.graph_to_gdfs(graph)
         updated_graph = copy.deepcopy(graph)
         for attribute in attributes:
