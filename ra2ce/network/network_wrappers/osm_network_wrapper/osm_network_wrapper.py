@@ -232,6 +232,8 @@ class OsmNetworkWrapper(NetworkWrapperProtocol):
             raise ValueError("Either of the link_type or network_type should be known")
         elif not _available_road_types:
             # The user specified only the network type.
+            osmnx.utils.config(use_cache=False)
+            osmnx.settings.use_cache = False
             _complex_graph = osmnx.graph_from_polygon(
                 polygon=polygon,
                 network_type=network_type.config_value,
@@ -241,12 +243,16 @@ class OsmNetworkWrapper(NetworkWrapperProtocol):
         elif not network_type:
             # The user specified only the road types.
             cf = f'["highway"~"{"|".join(_road_types_as_str)}"]'
+            osmnx.utils.config(use_cache=False)
+            osmnx.settings.use_cache = False
             _complex_graph = osmnx.graph_from_polygon(
                 polygon=polygon, custom_filter=cf, simplify=False, retain_all=True
             )
         else:
             # _available_road_types and network_type
             cf = f'["highway"~"{"|".join(_road_types_as_str)}"]'
+            osmnx.utils.config(use_cache=False)
+            osmnx.settings.use_cache = False
             _complex_graph = osmnx.graph_from_polygon(
                 polygon=polygon,
                 network_type=network_type.config_value,

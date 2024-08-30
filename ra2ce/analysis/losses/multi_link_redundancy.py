@@ -101,6 +101,8 @@ class MultiLinkRedundancy(AnalysisLossesProtocol):
 
             _graph = copy.deepcopy(master_graph)
             # Create a geodataframe from the full graph
+            osmnx.utils.config(use_cache=False)
+            osmnx.settings.use_cache = False
             gdf = osmnx.graph_to_gdfs(master_graph, nodes=False)
             if "rfid" in gdf:
                 gdf["rfid"] = gdf["rfid"].astype(str)

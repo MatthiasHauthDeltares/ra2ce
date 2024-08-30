@@ -164,6 +164,8 @@ class Network:
             # If all required attributes are present, return the original graph
             return graph
         graph = nut.add_x_y_to_nodes(graph)
+        osmnx.utils.config(use_cache=False)
+        osmnx.settings.use_cache = False
         _, gdf_edges = osmnx.graph_to_gdfs(graph)
         updated_graph = copy.deepcopy(graph)
         for attribute in attributes:
